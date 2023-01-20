@@ -1,5 +1,3 @@
-const nodemon = require("nodemon")
-
 const config = {
     production: {
         PORT: 2222
