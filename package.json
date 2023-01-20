@@ -4,7 +4,7 @@
   "description": "Softuni course project",
   "main": "src/index.js",
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "SET node_env=production&& node ./src/index.js",
     "dev": "nodemon ./src/index.js"
   },
   "repository": {
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/Ivaylo-Ganev/JSWeb-cubicle#readme",
   "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
