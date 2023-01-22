@@ -8,7 +8,7 @@ exports.getCubeController = (req, res) => {
 exports.postCubeController = (req, res) => {
     const {name, description, imageUrl, difficultyLevel} = req.body;
     const cube = new Cube(name, description, imageUrl, difficultyLevel);
-    cube.save(cube);
+    cube.save();
 
     res.redirect('/');
 }
