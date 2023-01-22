@@ -1,4 +1,5 @@
 const Cube = require('../models/Cube');
+const db = require('../db.json');
 
 
 exports.getCubeController = (req, res) => {
@@ -10,4 +11,16 @@ exports.postCubeController = (req, res) => {
     cube.save(cube);
 
     res.redirect('/');
+}
+exports.getCubeDetails = (req, res) => {
+    const cubeId = Number(req.params.cubeId);
+    if (!cubeId) {
+        res.redirect('/404');
+    }
+    const currentCube = db.cubes.find(cube => cube.id === cubeId);
+
+    if (!currentCube) {
+        res.redirect('/404');
+    }
+    res.render('details', {currentCube});
 }
