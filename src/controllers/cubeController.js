@@ -1,4 +1,5 @@
 const Cube = require('../models/Cube');
+const Accessory = require('../models/Accessory');
 
 exports.getCubeController = (req, res) => {
     res.render('create');
@@ -21,4 +22,12 @@ exports.getCubeDetails = async (req, res) => {
     }
   
     res.render('details', {currentCube});
+}
+
+exports.getAttachAccessory = async (req, res) => {
+    const cubeId = req.params.cubeId;
+    const cube = await Cube.findById(cubeId).lean();
+    const accessories = await Accessory.find().lean();
+
+    res.render('accessory/attachAccessory', {cube, accessories});
 }

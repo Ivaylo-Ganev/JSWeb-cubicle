@@ -10,6 +10,7 @@ router.get('/404', homeController.getErrorPage);
 router.get('/create', cubeController.getCubeController);
 router.post('/create', cubeController.postCubeController);
 router.get('/details/:cubeId', cubeController.getCubeDetails);
+router.get('/cubes/:cubeId/attach', cubeController.getAttachAccessory);
 
 router.use('/accessory', accessoryController);
 
