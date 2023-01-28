@@ -1,26 +1,24 @@
 const Cube = require('../models/Cube');
-const db = require('../db.json');
-
 
 exports.getCubeController = (req, res) => {
     res.render('create');
 }
-exports.postCubeController = (req, res) => {
+exports.postCubeController = async (req, res) => {
     const {name, description, imageUrl, difficultyLevel} = req.body;
-    const cube = new Cube(name, description, imageUrl, difficultyLevel);
-    cube.save();
+    const cube = new Cube( {name, description, imageUrl, difficultyLevel} );
+    await cube.save();
 
     res.redirect('/');
 }
-exports.getCubeDetails = (req, res) => {
-    const cubeId = Number(req.params.cubeId);
-    if (!cubeId) {
-        res.redirect('/404');
-    }
-    const currentCube = db.cubes.find(cube => cube.id === cubeId);
+exports.getCubeDetails = async (req, res) => {
+    const cubeId = req.params.cubeId;
+    
+    let currentCube = await Cube.findById(cubeId).lean();
 
     if (!currentCube) {
         res.redirect('/404');
+        return;
     }
+  
     res.render('details', {currentCube});
 }
