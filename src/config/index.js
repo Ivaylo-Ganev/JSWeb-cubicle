@@ -1,9 +1,11 @@
 const config = {
     production: {
-        PORT: 2222
+        PORT: 2222,
+        SECRET: 'SOMEPRODSECRET'
     },
     development: {
-        PORT: 5000
+        PORT: 5000,
+        SECRET: 'SOMEDEVSECRET'
     }
 }
 
