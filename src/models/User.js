@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+userSchema.method('validatePassword', function(password) {
+    return bcrypt.compare(password, this.password);
+})
+
 userSchema.pre('save', function(next) {
     bcrypt.hash(this.password, 10)
         .then(hash => {

@@ -5,6 +5,20 @@ router.get('/login', (req, res) => {
     res.render('auth/login');
 })
 
+router.post('/login', async (req, res) => {
+    const {username, password} = req.body;
+
+    try {
+        const user = await authServices.login(username, password);
+        console.log(user);
+    } catch (err) {
+        console.log(err);
+        return res.redirect('/');
+    }
+
+    res.redirect('/');
+})
+
 router.get('/register', (req, res) => {
     res.render('auth/register');
 })
@@ -20,14 +34,9 @@ router.post('/register', async (req, res) => {
     if(existingUser) {
         return res.redirect('/404');
     }
-    await authServices.registerUser(username, password);
+    const user = await authServices.registerUser(username, password);
 
     res.redirect('/login');
-})
-
-router.post('/login', (req, res) => {
-    const {username, password} = req.body;
-
 })
 
 module.exports = router;
