@@ -17,7 +17,7 @@ const cubeSchema = new mongoose.Schema({
             validator: function(value) {
                 return /^https?:\/\//g.test(value);
             },
-            message: "Url is not valid"
+            message: "Url is not valid!"
         }
     },
     difficultyLevel: {

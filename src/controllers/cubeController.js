@@ -7,9 +7,14 @@ exports.getCubeController = (req, res) => {
 }
 exports.postCubeController = async (req, res) => {
     const {name, description, imageUrl, difficultyLevel} = req.body;
+
+    try {
     const cube = new Cube( {name, description, imageUrl, difficultyLevel} );
     await cube.save();
-
+    } catch (err) {
+        console.log(err.message);
+        return res.redirect('/404');
+    }
     res.redirect('/');
 }
 exports.getCubeDetails = async (req, res) => {
