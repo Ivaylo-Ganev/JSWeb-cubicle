@@ -17,6 +17,7 @@ router.get('/cubes/:cubeId/attach', cubeController.getAttachAccessory);
 router.get('/cubes/:cubeId/edit', cubeController.getEditCube);
 router.post('/cubes/:cubeId/edit', cubeController.postEditCube);
 router.get('/cubes/:cubeId/delete', cubeController.getDeleteCube);
+router.post('/cubes/:cubeId/delete', cubeController.postDeleteCube);
 router.post('/cubes/:cubeId/attach', cubeController.postAttachAccessory);
 
 router.use('/accessories', accessoryController);
