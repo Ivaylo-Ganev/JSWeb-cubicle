@@ -34,7 +34,7 @@ exports.getCubeDetails = async (req, res) => {
         res.redirect('/404');
         return;
     }
-    const isOwner = currentCube.owner == req.user._id;
+    const isOwner = cubeUtils.isOwner(req.user, currentCube);
   
     res.render('cube/details', {currentCube, isOwner});
 }
@@ -61,6 +61,9 @@ exports.getEditCube = async (req, res) => {
     const cube = await cubeServices.getOne(req.params.cubeId).lean();
     const difficultyLevels = cubeUtils.generateDifficultyLevels(cube.difficultyLevel); 
 
+    if(!cubeUtils.isOwner(req.user, cube)) {
+        return res.redirect('/404')
+    }
     res.render('cube/edit', {cube, difficultyLevels});
 }
 
