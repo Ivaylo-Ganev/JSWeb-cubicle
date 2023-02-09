@@ -10,7 +10,10 @@ exports.login = async (username, password) => {
     const user = await this.getRegisteredUser(username);
     
     if (!user) {
-        throw 'Password or username not valid!'
+        throw {
+                message: 'Password or username not valid!',
+                payload: username
+        }
     };
 
     const isValid = await user.validatePassword(password);
